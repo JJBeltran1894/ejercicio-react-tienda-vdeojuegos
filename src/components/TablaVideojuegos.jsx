@@ -1,12 +1,13 @@
-import { videojuegos } from "../data/videojuegos";
+import React from "react";
 import "./TablaVideojuegos.css";
 
-function TablaVideojuegos({ empleados, onEliminar, onEditar }) {
+// Recibimos 'videojuegos' por props, como pide el taller
+function TablaVideojuegos({ videojuegos }) {
   return (
     <div className="tabla-container">
-      <div className="videojegos-header">
+      <div className="videojuegos-header">
         <h2>Tienda de Videojuegos</h2>
-        <p>Catalogo</p>
+        <p className="subtitle">Catálogo de Reliquias y Aventuras</p>
       </div>
 
       <div className="table-responsive">
@@ -20,24 +21,33 @@ function TablaVideojuegos({ empleados, onEliminar, onEditar }) {
               <th>Lanzamiento</th>
               <th>Precio</th>
               <th>Disponible</th>
-              <th>Progreso Descarga</th>
+              <th>Progreso</th>
             </tr>
           </thead>
           <tbody>
-            {videojuegos.map((vj) => {
+            {videojuegos.map((juego) => {
               return (
                 <tr key={juego.id}>
-                  <td>{juego.titulo}</td>
-                  <td>{juego.genero}</td>
+                  <td className="col-id">{juego.id}</td>
+                  <td className="col-titulo">{juego.titulo}</td>
+                  <td className="col-genero">{juego.genero}</td>
                   <td>{juego.plataforma}</td>
                   <td>{juego.lanzamiento}</td>
-                  <td>{juego.precio}</td>
-                  <td>{juego.disponible ? "Sí" : "No"}</td>
+                  <td className="col-precio">${juego.precio}</td>
                   <td>
-                    <progress value={juego.progreso} max="1"></progress>
-                    <span style={{ marginLeft: "8px" }}>
-                      {(juego.progreso * 100).toFixed(0)}%
+                    <span
+                      className={
+                        juego.disponible ? "badge-disponible" : "badge-agotado"
+                      }
+                    >
+                      {juego.disponible ? "Sí" : "No"}
                     </span>
+                  </td>
+                  <td className="col-progreso">
+                    <div className="progress-wrapper">
+                      <progress value={juego.progreso} max="1"></progress>
+                      <span>{(juego.progreso * 100).toFixed(0)}%</span>
+                    </div>
                   </td>
                 </tr>
               );

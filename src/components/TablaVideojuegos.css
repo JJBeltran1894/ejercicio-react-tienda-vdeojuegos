@@ -1,66 +1,169 @@
+/* Importamos fuentes épicas y modernas de Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap");
+
 /* Contenedor principal */
 .tabla-container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 40px 20px;
   font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
+    "Rajdhani", sans-serif; /* Fuente moderna tipo Starcraft/Overwatch */
+  color: #c8d0e0;
 }
 
-.tabla-container h2 {
+/* Cabecera Épica (Estilo World of Warcraft / Diablo) */
+.videojuegos-header {
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
 }
 
-/* Envoltura responsiva para la tabla */
+.videojuegos-header h2 {
+  font-family: "Cinzel", serif; /* Fuente de alta fantasía */
+  color: #f8b700; /* Dorado Blizzard */
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+  text-shadow:
+    0 0 15px rgba(248, 183, 0, 0.4),
+    2px 2px 4px #000;
+}
+
+.videojuegos-header .subtitle {
+  font-size: 1.2rem;
+  color: #a3dde7; /* Azul mágico */
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* Contenedor de la tabla con borde dorado mate */
 .table-responsive {
   width: 100%;
-  overflow-x: auto; /* Agrega un scroll horizontal en móviles */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  background: linear-gradient(180deg, #161925 0%, #0d0f16 100%);
+  border: 2px solid #4a3e20;
   border-radius: 8px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilos de la tabla */
+/* Estructura de la tabla */
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 700px; /* Evita que las columnas se aplasten demasiado */
-  background-color: white;
+  /*min-width: 850px;*/
 }
 
-th,
-td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
+/* Cabeceras de las columnas */
 th {
-  background-color: #f8f9fa;
-  color: #333;
-  font-weight: bold;
+  background-color: #1a1e2d;
+  color: #f8b700;
+  font-family: "Cinzel", serif;
+  font-size: 1rem;
+  font-weight: 350;
+  text-transform: uppercase;
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 2px solid #f8b700;
+  letter-spacing: 0.5px;
 }
 
-tr:hover {
-  background-color: #f1f1f1;
+/* Celdas del cuerpo */
+td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #2a3143;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-/* Estilo para la barra de progreso */
+/* Filas al pasar el mouse (Hover estilo selección de personaje) */
+tr:hover td {
+  background-color: #21283b;
+  color: #ffffff;
+}
+
+/* Estilos específicos para columnas */
+.col-id {
+  color: #6c7a9c;
+  font-weight: 700;
+}
+
+.col-titulo {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.col-genero {
+  color: #8b5ae6;
+}
+
+.col-precio {
+  color: #2ecc71; /* Verde de "loot" inusual */
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* Badges (Insignias) para la disponibilidad */
+.badge-disponible {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #2ecc71;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.badge-agotado {
+  background-color: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #e74c3c;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* --- BARRA DE PROGRESO ÉPICA (Estilo barra de Experiencia/Maná) --- */
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 progress {
-  width: 100px;
-  height: 18px;
+  width: 120px;
+  height: 14px;
   appearance: none;
+  border: 2px solid #111;
+  border-radius: 7px;
+  background-color: #000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+/* Fondo de la barra */
 progress::-webkit-progress-bar {
-  background-color: #eee;
-  border-radius: 4px;
+  background-color: #0d121a;
+  border-radius: 7px;
 }
 
+/* Relleno de la barra (Gradiente púrpura/azul mágico) */
 progress::-webkit-progress-value {
-  background-color: #4caf50;
-  border-radius: 4px;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.progress-wrapper span {
+  font-weight: 700;
+  color: #2575fc;
+  min-width: 40px;
 }
