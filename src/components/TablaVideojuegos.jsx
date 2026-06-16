@@ -1,4 +1,5 @@
 import { videojuegos } from "../data/videojuegos";
+import "./TablaVideojuegos.css";
 
 function TablaVideojuegos({ empleados, onEliminar, onEditar }) {
   return (
