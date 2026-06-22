@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TablaVideojuegos from "./components/TablaVideojuegos";
 import { videojuegos as mockData } from "./data/videojuegos";
 import FormularioVideojuego from "./components/FormularioVideojuego";
@@ -8,7 +8,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  const [videojuegos, setVideojuegos] = useState(mockData);
+  const [videojuegos, setVideojuegos] = useState(() => {
+    const datosGuardados = localStorage.getItem("lista_videojuegos");
+    return datosGuardados ? JSON.parse(datosGuardados) : mockData;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("lista_videojuegos", JSON.stringify(videojuegos));
+  }, [videojuegos]);
 
   function agregarVideojuego(videojuegoNuevo) {
     setVideojuegos([...videojuegos, videojuegoNuevo]);
