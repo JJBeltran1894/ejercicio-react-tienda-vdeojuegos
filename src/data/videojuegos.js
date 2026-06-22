@@ -100,3 +100,23 @@ export const videojuegos = [
     progreso: 0.75,
   },
 ];
+
+export const plataformas = [
+  "Multiplataforma",
+  "Nintendo Switch",
+  "PC",
+  "PlayStation 4",
+  "PlayStation 5",
+];
+
+export const generos = [
+  "Acción",
+  "Aventura",
+  "Metroidvania",
+  "Mundo Abierto",
+  "Plataformas",
+  "RPG",
+  "RPG de Acción",
+  "Sandbox",
+  "Simulación",
+];
