@@ -2,7 +2,10 @@ import { useState } from "react";
 import TablaVideojuegos from "./components/TablaVideojuegos";
 import { videojuegos as mockData } from "./data/videojuegos";
 import FormularioVideojuego from "./components/FormularioVideojuego";
-//import './App.css'
+import Noencontrada from "./pages/Noencontrada";
+import Navbar from "./components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
 
 function App() {
   const [videojuegos, setVideojuegos] = useState(mockData);
@@ -36,15 +39,29 @@ function App() {
   }
 
   return (
-    <main
-      style={{
-        padding: "20px",
-        backgroundColor: "#05070a",
-        minHeight: "100vh",
-      }}
-    >
-      <TablaVideojuegos videojuegos={juegos} />
-    </main>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <TablaVideojuegos
+              videojuegos={videojuegos}
+              onEliminar={eliminarVideojuego}
+            />
+          }
+        />
+        <Route
+          path="/nuevo"
+          element={<FormularioVideojuego onGuardar={manejarGuardar} />}
+        />
+        <Route
+          path="/editar"
+          element={<FormularioVideojuego onGuardar={manejarGuardar} />}
+        />
+        <Route path="*" element={<Noencontrada />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generos, plataformas } from "../data/videojuegos";
+import "./FormularioVideojuego.css"; // <-- Importación del estilo
 
 function FormularioVideojuego({ onGuardar }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const videojuegoRecuperado = location.state?.videojuego || null;
 
   const [titulo, setTitulo] = useState("");
@@ -11,8 +13,8 @@ function FormularioVideojuego({ onGuardar }) {
   const [plataforma, setPlataforma] = useState("");
   const [lanzamiento, setLanzamiento] = useState("");
   const [precio, setPrecio] = useState("");
-  const [disponible, setDisponible] = useState("");
-  const [progreso, setProgreso] = useState("");
+  const [disponible, setDisponible] = useState(false); // Mejor inicializar en false
+  const [progreso, setProgreso] = useState(0); // Mejor inicializar en 0
 
   useEffect(() => {
     if (videojuegoRecuperado) {
@@ -29,8 +31,8 @@ function FormularioVideojuego({ onGuardar }) {
       setPlataforma("");
       setLanzamiento("");
       setPrecio("");
-      setDisponible("");
-      setProgreso("");
+      setDisponible(false);
+      setProgreso(0);
     }
   }, [videojuegoRecuperado]);
 
@@ -58,31 +60,35 @@ function FormularioVideojuego({ onGuardar }) {
 
   return (
     <div className="form-container">
-      {/* Título dinámico que cambia si estamos editando o creando */}
       <h2 className="form-title">
-        {empleadoRecuperado ? "Editar Empleado" : "Registrar Empleado"}
+        {videojuegoRecuperado ? "Forjar Edición" : "Invocar Videojuego"}
       </h2>
-      <div>
-        <label>Titulo</label>
+
+      <div className="form-group">
+        <label>Título</label>
         <input
           type="text"
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
-          placeholder="Mario Bros."
+          placeholder="Ej: Diablo IV"
         />
       </div>
-      <div>
-        <label>Genero</label>
+
+      <div className="form-group">
+        <label>Género</label>
         <select value={genero} onChange={(e) => setGenero(e.target.value)}>
           <option value="" disabled>
-            Seleccione un Genero
+            Seleccione un Género
           </option>
           {generos.map((genero) => (
-            <option value={genero}>{genero}</option>
+            <option key={genero} value={genero}>
+              {genero}
+            </option>
           ))}
         </select>
       </div>
-      <div>
+
+      <div className="form-group">
         <label>Plataforma</label>
         <select
           value={plataforma}
@@ -92,56 +98,74 @@ function FormularioVideojuego({ onGuardar }) {
             Seleccione una Plataforma
           </option>
           {plataformas.map((plataforma) => (
-            <option value={plataforma}>{plataforma}</option>
+            <option key={plataforma} value={plataforma}>
+              {plataforma}
+            </option>
           ))}
         </select>
       </div>
-      <div>
-        <label>Lanzamiento</label>
-        <input
-          type="number"
-          value={lanzamiento}
-          onChange={(e) => setLanzamiento(e.target.value)}
-          placeholder="2001"
-          min="1980"
-        />
+
+      <div className="form-row">
+        <div className="form-group half-width">
+          <label>Lanzamiento</label>
+          <input
+            type="number"
+            value={lanzamiento}
+            onChange={(e) => setLanzamiento(e.target.value)}
+            placeholder="2024"
+            min="1980"
+          />
+        </div>
+
+        <div className="form-group half-width">
+          <label>Precio ($)</label>
+          <input
+            type="number"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+          />
+        </div>
       </div>
-      <div>
-        <label>Precio</label>
-        <input
-          type="number"
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
-          placeholder="0.00"
-          min="0"
-        />
-      </div>
-      <div>
-        <label>
+
+      <div className="form-group checkbox-group">
+        <label className="checkbox-label">
           <input
             type="checkbox"
             checked={disponible}
             onChange={(e) => setDisponible(e.target.checked)}
           />
-          <span>Disponible para descarga</span>
+          <span className="checkbox-text">
+            Disponible para descarga en la bóveda
+          </span>
         </label>
       </div>
-      <div>
+
+      <div className="form-group">
         <label>
-          Progreso de Descarga: {(valorDelProgreso * 100).toFixed(0)}%
+          Progreso de Descarga:{" "}
+          <span className="progreso-text">{(progreso * 100).toFixed(0)}%</span>
         </label>
         <input
           type="range"
           min="0"
           max="1"
           step="0.01"
-          value={valorDelProgreso}
+          value={progreso}
           onChange={(e) => setProgreso(e.target.value)}
+          className="epic-slider"
         />
       </div>
-      <div>
-        <button onClick={manejarCancelar}>Cancelar</button>
-        <button onClick={manejarGuardar}>Guardar Empleado</button>
+
+      <div className="form-actions">
+        <button className="btn-cancelar" onClick={manejarCancelar}>
+          Huir (Cancelar)
+        </button>
+        <button className="btn-guardar" onClick={manejarGuardar}>
+          Forjar (Guardar)
+        </button>
       </div>
     </div>
   );

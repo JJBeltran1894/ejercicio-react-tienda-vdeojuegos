@@ -7,8 +7,8 @@ function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
   return (
     <div className="tabla-container">
       <div className="videojuegos-header">
-        <h2>Tienda de Videojuegos</h2>
-        <p className="subtitle">Catálogo de Reliquias y Aventuras</p>
+        <h2>Catálogo</h2>
+        <p className="subtitle">De Reliquias y Aventuras</p>
       </div>
 
       <div className="table-responsive">
