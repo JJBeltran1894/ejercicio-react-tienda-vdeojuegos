@@ -1,0 +1,69 @@
+/* Contenedor principal de la barra de navegación */
+.navbar-epic {
+  display: flex;
+  justify-content: space-between; /* Separa el logo a la izquierda y enlaces a la derecha */
+  align-items: center; /* Centra verticalmente */
+  padding: 15px 40px;
+  background: linear-gradient(180deg, #1a1e2d 0%, #0d0f16 100%);
+  border-bottom: 2px solid #4a3e20; /* Borde inferior dorado oscuro */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+  font-family: "Rajdhani", sans-serif;
+}
+
+/* Título / Logo de la tienda */
+.navbar-logo {
+  font-family: "Cinzel", serif;
+  color: #f8b700; /* Dorado legendario */
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 10px rgba(248, 183, 0, 0.4),
+    2px 2px 4px #000;
+  cursor: default;
+}
+
+/* Contenedor de los botones/enlaces */
+.navbar-links {
+  display: flex;
+  gap: 30px; /* Espacio entre cada botón */
+}
+
+/* Estilo individual de cada enlace */
+.nav-link {
+  color: #c8d0e0;
+  text-decoration: none; /* Quita el subrayado azul feo por defecto de los <a> */
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 12px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse por encima (Hover) */
+.nav-link:hover {
+  color: #00d8ff; /* Cambia a azul mágico */
+  text-shadow: 0 0 10px rgba(0, 216, 255, 0.5);
+}
+
+/* Súper truco CSS: Animación de la línea inferior (Estilo barra de maná) */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #00d8ff;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+/* Al hacer hover, la línea se expande desde el centro */
+.nav-link:hover::after {
+  width: 100%;
+  box-shadow: 0 0 8px #00d8ff;
+}
