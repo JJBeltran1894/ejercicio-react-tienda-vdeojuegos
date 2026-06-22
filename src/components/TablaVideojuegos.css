@@ -4,7 +4,7 @@
 /* Contenedor principal */
 .tabla-container {
   width: 95%; /* Deja un pequeño margen automático del 2.5% a cada lado */
-  max-width: 1300px; /* ¡El tope máximo! En monitores gigantes no pasará de este ancho */
+  max-width: 1500px; /* ¡El tope máximo! En monitores gigantes no pasará de este ancho */
   margin: 40px auto; /* Centra el contenedor y le da margen arriba y abajo */
   padding: 20px;
   font-family: "Rajdhani", sans-serif;
@@ -83,6 +83,7 @@ td {
   font-size: 1.1rem;
   font-weight: 500;
   transition: all 0.2s ease;
+  vertical-align: middle;
 }
 
 /* Filas al pasar el mouse (Hover estilo selección de personaje) */
@@ -175,9 +176,11 @@ progress::-webkit-progress-value {
 /* =========================================
    BOTONES DE ACCIÓN (Editar / Eliminar)
 ========================================= */
-.acciones-cell {
+.acciones-wrapper {
   display: flex;
   gap: 10px;
+  align-items: center; /* Centra los botones perfectamente */
+  justify-content: flex-start; /* Los alinea a la izquierda */
 }
 
 .btn-accion {
@@ -236,3 +239,54 @@ progress::-webkit-progress-value {
     padding: 20px 0px;
   }
 }
+
+/* =========================================
+   NUEVAS COLUMNAS (TALLER)
+========================================= */
+.col-calificacion {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.col-sinopsis {
+  max-width: 180px; /* Limita el ancho máximo */
+  white-space: nowrap; /* Evita que el texto salte a la siguiente línea */
+  overflow: hidden; /* Oculta lo que no cabe */
+  text-overflow: ellipsis; /* Agrega los "..." al final */
+  color: #8fa0c0; /* Un color un poco más suave para lectura */
+  font-size: 1rem;
+  cursor: help; /* Cambia el cursor para indicar que hay más info (tooltip) */
+}
+
+/* Insignias de Puntuación estilo Metacritic */
+.score-badge {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 8px;
+  text-align: center;
+  color: #fff;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Colores condicionales según la nota */
+.score-high {
+  background-color: #2ecc71;
+  border-color: #27ae60;
+} /* 80-100 Verde */
+.score-medium {
+  background-color: #f1c40f;
+  border-color: #f39c12;
+  color: #111;
+} /* 60-79 Amarillo */
+.score-low {
+  background-color: #e74c3c;
+  border-color: #c0392b;
+} /* 0-59 Rojo */

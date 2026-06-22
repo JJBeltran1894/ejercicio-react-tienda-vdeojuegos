@@ -58,6 +58,8 @@
 /* Inputs de texto, número y selects */
 .form-group input[type="text"],
 .form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
 .form-group select {
   width: 100%;
   padding: 12px 15px;
@@ -69,11 +71,14 @@
   font-size: 1.1rem;
   transition: all 0.3s ease;
   box-sizing: border-box;
+  resize: vertical;
 }
 
 /* Efecto Focus (Cuando el usuario hace clic para escribir) */
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus,
 .form-group select:focus {
   outline: none;
   border-color: #f8b700;
