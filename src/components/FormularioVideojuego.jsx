@@ -45,7 +45,7 @@ function FormularioVideojuego({ onGuardar }) {
     }
   }, [videojuegoRecuperado]);
 
-  function manejarGuardar() {
+  function manejarGuardar(e) {
     if (e) e.preventDefault();
     const erroresDetectados = validarFormulario();
 
