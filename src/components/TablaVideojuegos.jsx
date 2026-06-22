@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 // Recibimos 'videojuegos' por props, como pide el taller
 function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
+  const navigate = useNavigate();
+
+  function navegarEditar(juego) {
+    navigate("/editar", { state: { videojuego: juego } });
+  }
   return (
     <div className="tabla-container">
       <div className="videojuegos-header">
@@ -51,9 +56,17 @@ function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
                       <span>{(juego.progreso * 100).toFixed(0)}%</span>
                     </div>
                   </td>
-                  <td>
-                    <button onClick={() => navegarEditar(juego)}>Editar</button>
-                    <button onClick={() => onEliminar(juego.id)}>
+                  <td className="acciones-cell">
+                    <button
+                      className="btn-accion btn-editar"
+                      onClick={() => navegarEditar(juego)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="btn-accion btn-eliminar"
+                      onClick={() => onEliminar(juego.id)}
+                    >
                       Eliminar
                     </button>
                   </td>

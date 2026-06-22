@@ -190,3 +190,32 @@
   box-shadow: 0 0 15px rgba(248, 183, 0, 0.6);
   transform: translateY(-2px);
 }
+/* =========================================
+   RESPONSIVIDAD DEL FORMULARIO (Móviles)
+========================================= */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 25px 15px; /* Reducimos el padding interno */
+    margin: 20px 10px; /* Reducimos el margen exterior */
+  }
+
+  .form-title {
+    font-size: 1.8rem; /* Título un poco más pequeño */
+  }
+
+  /* Hacemos que las columnas dobles se apilen verticalmente */
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Los botones ocupan todo el ancho y se apilan */
+  .form-actions {
+    flex-direction: column-reverse; /* El botón principal queda arriba */
+  }
+
+  .form-actions button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

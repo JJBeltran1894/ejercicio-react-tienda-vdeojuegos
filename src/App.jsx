@@ -11,11 +11,11 @@ function App() {
   const [videojuegos, setVideojuegos] = useState(mockData);
 
   function agregarVideojuego(videojuegoNuevo) {
-    setEmpleados([...videojuegos, videojuegoNuevo]);
+    setVideojuegos([...videojuegos, videojuegoNuevo]);
   }
   function eliminarVideojuego(id) {
     const filtrados = videojuegos.filter((videojuego) => videojuego.id !== id);
-    setEmpleados(filtrados);
+    setVideojuegos(filtrados);
   }
 
   function editarVideojuego(videojuegoEditado) {

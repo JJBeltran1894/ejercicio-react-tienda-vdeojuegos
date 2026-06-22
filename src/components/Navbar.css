@@ -67,3 +67,23 @@
   width: 100%;
   box-shadow: 0 0 8px #00d8ff;
 }
+/* =========================================
+   RESPONSIVIDAD DEL NAVBAR (Móviles)
+========================================= */
+@media (max-width: 600px) {
+  .navbar-epic {
+    flex-direction: column; /* Apila el logo y los links */
+    gap: 15px;
+    padding: 15px 20px;
+  }
+
+  .navbar-links {
+    width: 100%;
+    justify-content: center; /* Centra los botones */
+  }
+
+  .nav-link {
+    font-size: 1rem; /* Textos de links ligeramente más pequeños */
+    padding: 5px 8px;
+  }
+}
