@@ -224,3 +224,35 @@
     margin-bottom: 10px;
   }
 }
+/* =========================================
+   ESTILOS DE VALIDACIÓN Y ERRORES (PASO 2)
+========================================= */
+
+/* Borde rojo para el input que tiene un error */
+.form-group input.input-error,
+.form-group textarea.input-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Animación sutil de entrada para el texto del error */
+@keyframes slideDownError {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilo del texto del mensaje de error */
+.error-mensaje {
+  color: #ff5252;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 5px;
+  letter-spacing: 0.5px;
+  animation: slideDownError 0.3s ease forwards;
+}
