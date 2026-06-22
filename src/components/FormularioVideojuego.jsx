@@ -7,6 +7,7 @@ function FormularioVideojuego({ onGuardar }) {
   const location = useLocation();
   const navigate = useNavigate();
   const videojuegoRecuperado = location.state?.videojuego || null;
+  const [errores, setErrores] = useState({});
 
   const [titulo, setTitulo] = useState("");
   const [genero, setGenero] = useState("");
@@ -45,6 +46,16 @@ function FormularioVideojuego({ onGuardar }) {
   }, [videojuegoRecuperado]);
 
   function manejarGuardar() {
+    if (e) e.preventDefault();
+    const erroresDetectados = validarFormulario();
+
+    if (Object.keys(erroresDetectados).length > 0) {
+      setErrores(erroresDetectados);
+      return; // Fin de la ejecución, no se guarda el juego
+    }
+
+    setErrores({});
+
     const añoCalculado = fechaLanzamiento ? fechaLanzamiento.split("-")[0] : "";
     const videojuego = {
       id:
@@ -70,6 +81,22 @@ function FormularioVideojuego({ onGuardar }) {
     navigate("/");
   }
 
+  function validarFormulario() {
+    const erroresActivos = {};
+    if (!titulo.trim()) {
+      erroresActivos.titulo = "El título no puede estar vacio";
+    }
+    if (sinopsis.trim().length < 10) {
+      erroresActivos.sinopsis =
+        "La descripción debe tener al menos 10 caracteres";
+    }
+    const nota = Number(calificacion);
+    if (!calificacion || nota < 1 || nota > 100) {
+      erroresActivos.calificacion = "La nota debe estar entre 1 y 100";
+    }
+    return erroresActivos;
+  }
+
   const fechaMaxima = new Date().toISOString().split("T")[0];
 
   return (
@@ -86,6 +113,9 @@ function FormularioVideojuego({ onGuardar }) {
           onChange={(e) => setTitulo(e.target.value)}
           placeholder="Ej: Diablo IV"
         />
+        {errores.titulo && (
+          <span className="error-mensaje">{errores.titulo}</span>
+        )}
       </div>
 
       <div className="form-group">
@@ -98,6 +128,9 @@ function FormularioVideojuego({ onGuardar }) {
           placeholder="Escribe una breve reseña del juego... (10 a 250 caracteres)"
           rows="4"
         ></textarea>
+        {errores.sinopsis && (
+          <span className="error-mensaje">{errores.sinopsis}</span>
+        )}
       </div>
 
       <div className="form-group">
@@ -166,6 +199,9 @@ function FormularioVideojuego({ onGuardar }) {
           min="1"
           max="100"
         />
+        {errores.calificacion && (
+          <span className="error-mensaje">{errores.calificacion}</span>
+        )}
       </div>
 
       <div className="form-group checkbox-group">
