@@ -6,6 +6,13 @@ import { useNavigate } from "react-router-dom";
 function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
   const navigate = useNavigate();
 
+  const obtenerClaseCalificacion = (nota) => {
+    if (!nota) return "score-low";
+    if (nota >= 80) return "score-high";
+    if (nota >= 60) return "score-medium";
+    return "score-low";
+  };
+
   function navegarEditar(juego) {
     navigate("/editar", { state: { videojuego: juego } });
   }
@@ -22,9 +29,11 @@ function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
             <tr>
               <th>Id</th>
               <th>Título</th>
+              <th>Sinopsis</th>
               <th>Género</th>
               <th>Plataforma</th>
               <th>Lanzamiento</th>
+              <th>Crítica</th>
               <th>Precio</th>
               <th>Disponible</th>
               <th>Progreso</th>
@@ -37,9 +46,19 @@ function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
                 <tr key={juego.id}>
                   <td className="col-id">{juego.id}</td>
                   <td className="col-titulo">{juego.titulo}</td>
+                  <td className="col-sinopsis" title={juego.sinopsis}>
+                    {juego.sinopsis || "Sin descripción..."}
+                  </td>
                   <td className="col-genero">{juego.genero}</td>
                   <td>{juego.plataforma}</td>
                   <td>{juego.lanzamiento}</td>
+                  <td className="col-calificacion">
+                    <span
+                      className={`score-badge ${obtenerClaseCalificacion(juego.calificacion)}`}
+                    >
+                      {juego.calificacion || "-"}
+                    </span>
+                  </td>
                   <td className="col-precio">${juego.precio}</td>
                   <td>
                     <span
@@ -56,19 +75,21 @@ function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
                       <span>{(juego.progreso * 100).toFixed(0)}%</span>
                     </div>
                   </td>
-                  <td className="acciones-cell">
-                    <button
-                      className="btn-accion btn-editar"
-                      onClick={() => navegarEditar(juego)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="btn-accion btn-eliminar"
-                      onClick={() => onEliminar(juego.id)}
-                    >
-                      Eliminar
-                    </button>
+                  <td>
+                    <div className="acciones-wrapper">
+                      <button
+                        className="btn-accion btn-editar"
+                        onClick={() => navegarEditar(juego)}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="btn-accion btn-eliminar"
+                        onClick={() => onEliminar(juego.id)}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
                   </td>
                 </tr>
               );

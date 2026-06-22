@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generos, plataformas } from "../data/videojuegos";
-import "./FormularioVideojuego.css"; // <-- Importación del estilo
+import "./FormularioVideojuego.css";
 
 function FormularioVideojuego({ onGuardar }) {
   const location = useLocation();
@@ -11,32 +11,41 @@ function FormularioVideojuego({ onGuardar }) {
   const [titulo, setTitulo] = useState("");
   const [genero, setGenero] = useState("");
   const [plataforma, setPlataforma] = useState("");
-  const [lanzamiento, setLanzamiento] = useState("");
+  //const [lanzamiento, setLanzamiento] = useState("");
   const [precio, setPrecio] = useState("");
   const [disponible, setDisponible] = useState(false); // Mejor inicializar en false
   const [progreso, setProgreso] = useState(0); // Mejor inicializar en 0
 
+  const [fechaLanzamiento, setFechaLanzamiento] = useState("");
+  const [sinopsis, setSinopsis] = useState("");
+  const [calificacion, setCalificacion] = useState("");
+
   useEffect(() => {
     if (videojuegoRecuperado) {
-      setTitulo(videojuegoRecuperado.titulo);
-      setGenero(videojuegoRecuperado.genero);
-      setPlataforma(videojuegoRecuperado.plataforma);
-      setLanzamiento(videojuegoRecuperado.lanzamiento);
-      setPrecio(videojuegoRecuperado.precio);
-      setDisponible(videojuegoRecuperado.disponible);
-      setProgreso(videojuegoRecuperado.progreso);
+      setTitulo(videojuegoRecuperado.titulo || "");
+      setGenero(videojuegoRecuperado.genero || "");
+      setPlataforma(videojuegoRecuperado.plataforma || "");
+      setPrecio(videojuegoRecuperado.precio || "");
+      setDisponible(videojuegoRecuperado.disponible || false);
+      setProgreso(videojuegoRecuperado.progreso || 0);
+      setFechaLanzamiento(videojuegoRecuperado.fechaLanzamiento || "");
+      setSinopsis(videojuegoRecuperado.sinopsis || "");
+      setCalificacion(videojuegoRecuperado.calificacion || "");
     } else {
       setTitulo("");
       setGenero("");
       setPlataforma("");
-      setLanzamiento("");
       setPrecio("");
       setDisponible(false);
       setProgreso(0);
+      setFechaLanzamiento("");
+      setSinopsis("");
+      setCalificacion("");
     }
   }, [videojuegoRecuperado]);
 
   function manejarGuardar() {
+    const añoCalculado = fechaLanzamiento ? fechaLanzamiento.split("-")[0] : "";
     const videojuego = {
       id:
         videojuegoRecuperado !== null && videojuegoRecuperado !== undefined
@@ -45,10 +54,13 @@ function FormularioVideojuego({ onGuardar }) {
       titulo: titulo,
       genero: genero,
       plataforma: plataforma,
-      lanzamiento: lanzamiento,
+      lanzamiento: añoCalculado,
       precio: precio,
       disponible: disponible,
       progreso: Number(progreso),
+      fechaLanzamiento: fechaLanzamiento,
+      sinopsis: sinopsis,
+      calificacion: Number(calificacion),
     };
     onGuardar(videojuego);
     navigate("/");
@@ -57,6 +69,8 @@ function FormularioVideojuego({ onGuardar }) {
   function manejarCancelar() {
     navigate("/");
   }
+
+  const fechaMaxima = new Date().toISOString().split("T")[0];
 
   return (
     <div className="form-container">
@@ -72,6 +86,18 @@ function FormularioVideojuego({ onGuardar }) {
           onChange={(e) => setTitulo(e.target.value)}
           placeholder="Ej: Diablo IV"
         />
+      </div>
+
+      <div className="form-group">
+        <label>Sinopsis / Descripción</label>
+        <textarea
+          value={sinopsis}
+          onChange={(e) => setSinopsis(e.target.value)}
+          minLength="10"
+          maxLength="250"
+          placeholder="Escribe una breve reseña del juego... (10 a 250 caracteres)"
+          rows="4"
+        ></textarea>
       </div>
 
       <div className="form-group">
@@ -107,13 +133,13 @@ function FormularioVideojuego({ onGuardar }) {
 
       <div className="form-row">
         <div className="form-group half-width">
-          <label>Lanzamiento</label>
+          <label>Fecha de Lanzamiento</label>
           <input
-            type="number"
-            value={lanzamiento}
-            onChange={(e) => setLanzamiento(e.target.value)}
-            placeholder="2024"
-            min="1980"
+            type="date"
+            value={fechaLanzamiento}
+            onChange={(e) => setFechaLanzamiento(e.target.value)}
+            max={fechaMaxima}
+            min="1980-01-01"
           />
         </div>
 
@@ -128,6 +154,18 @@ function FormularioVideojuego({ onGuardar }) {
             step="0.01"
           />
         </div>
+      </div>
+
+      <div className="form-group">
+        <label>Calificación de la Crítica</label>
+        <input
+          type="number"
+          value={calificacion}
+          onChange={(e) => setCalificacion(e.target.value)}
+          placeholder="Rango de 1 a 100 (Ej: 95)"
+          min="1"
+          max="100"
+        />
       </div>
 
       <div className="form-group checkbox-group">
