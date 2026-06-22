@@ -1,8 +1,9 @@
 import React from "react";
 import "./TablaVideojuegos.css";
+import { useNavigate } from "react-router-dom";
 
 // Recibimos 'videojuegos' por props, como pide el taller
-function TablaVideojuegos({ videojuegos }) {
+function TablaVideojuegos({ videojuegos, onEditar, onEliminar }) {
   return (
     <div className="tabla-container">
       <div className="videojuegos-header">
@@ -22,6 +23,7 @@ function TablaVideojuegos({ videojuegos }) {
               <th>Precio</th>
               <th>Disponible</th>
               <th>Progreso</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -48,6 +50,12 @@ function TablaVideojuegos({ videojuegos }) {
                       <progress value={juego.progreso} max="1"></progress>
                       <span>{(juego.progreso * 100).toFixed(0)}%</span>
                     </div>
+                  </td>
+                  <td>
+                    <button onClick={() => navegarEditar(juego)}>Editar</button>
+                    <button onClick={() => onEliminar(juego.id)}>
+                      Eliminar
+                    </button>
                   </td>
                 </tr>
               );
