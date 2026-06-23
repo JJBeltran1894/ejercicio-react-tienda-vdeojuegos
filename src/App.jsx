@@ -5,6 +5,7 @@ import FormularioVideojuego from "./components/FormularioVideojuego";
 import Noencontrada from "./pages/Noencontrada";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AlertaNotificacion from "./components/AlertaNotificacion";
 import "./App.css";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     const datosGuardados = localStorage.getItem("lista_videojuegos");
     return datosGuardados ? JSON.parse(datosGuardados) : mockData;
   });
+  const [mensajeAlerta, setMensajeAlerta] = useState("");
 
   useEffect(() => {
     localStorage.setItem("lista_videojuegos", JSON.stringify(videojuegos));
@@ -19,10 +21,13 @@ function App() {
 
   function agregarVideojuego(videojuegoNuevo) {
     setVideojuegos([...videojuegos, videojuegoNuevo]);
+    setMensajeAlerta("¡Videojuego forjado con éxito en la bóveda!");
   }
+
   function eliminarVideojuego(id) {
     const filtrados = videojuegos.filter((videojuego) => videojuego.id !== id);
     setVideojuegos(filtrados);
+    setMensajeAlerta("¡El videojuego ha sido destruido!");
   }
 
   function editarVideojuego(videojuegoEditado) {
@@ -34,6 +39,7 @@ function App() {
       }
     });
     setVideojuegos(actualizados);
+    setMensajeAlerta("¡Videojuego forjado con éxito en la bóveda!");
   }
 
   function manejarGuardar(videojuego) {
@@ -68,6 +74,10 @@ function App() {
         />
         <Route path="*" element={<Noencontrada />} />
       </Routes>
+      <AlertaNotificacion
+        mensaje={mensajeAlerta}
+        onClose={() => setMensajeAlerta("")}
+      />
     </BrowserRouter>
   );
 }
