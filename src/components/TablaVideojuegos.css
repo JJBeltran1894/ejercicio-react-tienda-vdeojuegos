@@ -4,7 +4,7 @@
 /* Contenedor principal */
 .tabla-container {
   width: 95%; /* Deja un pequeño margen automático del 2.5% a cada lado */
-  max-width: 1500px; /* ¡El tope máximo! En monitores gigantes no pasará de este ancho */
+  max-width: 1550px; /* ¡El tope máximo! En monitores gigantes no pasará de este ancho */
   margin: 40px auto; /* Centra el contenedor y le da margen arriba y abajo */
   padding: 20px;
   font-family: "Rajdhani", sans-serif;

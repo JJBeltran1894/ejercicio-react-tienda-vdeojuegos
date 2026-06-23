@@ -1,0 +1,64 @@
+/* Contenedor flotante en la esquina superior derecha */
+.toast-container {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background: rgba(46, 204, 113, 0.95); /* Verde esmeralda semitransparente */
+  color: #ffffff;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  z-index: 9999; /* Se asegura de estar por encima de TODO */
+  border: 1px solid #27ae60;
+}
+
+/* Icono de éxito redondo */
+.toast-icon {
+  background: #ffffff;
+  color: #2ecc71;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+/* Animaciones */
+@keyframes slideInRight {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+/* Clases que React controlará para animar la entrada y salida */
+.toast-enter {
+  animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.toast-exit {
+  animation: slideOutRight 0.4s ease-in forwards;
+}
